@@ -84,8 +84,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
           headers: {
             "Accept" => "*/*",
             "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "Authorization" => "Bearer act.example12345Example12345Example",
-            "User-Agent" => "Faraday v2.9.0"
+            "Authorization" => "Bearer act.example12345Example12345Example"
           }
         )
         .to_return(
