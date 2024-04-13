@@ -105,7 +105,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
         )
     end
 
-    it "calls the callback with the access token" do
+    it "has basic user info" do
       status, = subject.call!(env)
       expect(status).to eq(200)
       expect(env.fetch("omniauth.auth")).to include(
@@ -173,7 +173,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
         )
     end
 
-    it "calls the callback with the access token" do
+    it "has no user info" do
       status, = subject.call!(env)
       expect(status).to eq(200)
       expect(env.fetch("omniauth.auth")).to include(
@@ -260,7 +260,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
         )
     end
 
-    it "calls the callback with the access token" do # rubocop:disable Metrics/BlockLength
+    it "has extened user info" do # rubocop:disable Metrics/BlockLength
       status, = subject.call!(env)
       expect(status).to eq(200)
       expect(env.fetch("omniauth.auth")).to include(

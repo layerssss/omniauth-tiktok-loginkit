@@ -51,7 +51,6 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
-          # params[:scope] ||= DEFAULT_SCOPE
           params[:client_key] = options.client_key
         end
       end
