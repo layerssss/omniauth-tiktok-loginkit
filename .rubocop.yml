@@ -1,8 +1,14 @@
 AllCops:
   TargetRubyVersion: 3.0
+  NewCops: disable
+  SuggestExtensions: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+
+Naming/FileName:
+  Exclude:
+    - 'lib/omniauth-tiktok-loginkit.rb'
