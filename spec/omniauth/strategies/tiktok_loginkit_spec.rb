@@ -111,15 +111,21 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
       expect(env.fetch("omniauth.auth")).to include(
         "provider" => "tiktok-loginkit",
         "uid" => "afd97af1-b87b-48b9-ac98-410aghda5344",
-        "info" => include(
+        "info" => {
           "name" => "example",
           "image" => "https://example.com/avatar_100.jpg"
-        ),
+        },
         "credentials" => include(
           "token" => "act.example12345Example12345Example",
           "refresh_token" => "rft.example12345Example12345Example",
           "expires" => true
-        )
+        ),
+        "extra" => {
+          "avatar_url" => "https://example.com/avatar.jpg",
+          "avatar_url_100" => "https://example.com/avatar_100.jpg",
+          "display_name" => "example",
+          "open_id" => "afd97af1-b87b-48b9-ac98-410aghda5344"
+        }
       )
     end
   end

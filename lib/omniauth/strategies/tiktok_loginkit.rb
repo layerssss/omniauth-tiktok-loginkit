@@ -34,7 +34,7 @@ module OmniAuth
       end
 
       extra do
-        @user_info.to_h
+        user_info
       end
 
       def authorize_params
@@ -58,19 +58,22 @@ module OmniAuth
       private
 
       def user_info # rubocop:disable Metrics/MethodLength
+        return if skip_info?
+
         @user_info ||= begin
           fields = %w[open_id avatar_url avatar_url_100 display_name]
           if options.scope.include?("user.info.profile")
             fields.push("profile_web_link", "profile_deep_link", "bio_description", "is_verified")
           end
-          access_token
-            .get(
-              USER_INFO_URL,
-              params: {
-                fields: fields.join(",")
-              }
-            )
-            .parsed.fetch("data").fetch("user")
+          response = access_token
+                     .get(
+                       USER_INFO_URL,
+                       params: {
+                         fields: fields.join(",")
+                       }
+                     )
+                     .parsed
+          response.fetch("data").fetch("user")
         end
       end
     end
