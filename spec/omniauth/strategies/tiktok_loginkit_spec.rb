@@ -129,4 +129,63 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
       )
     end
   end
+
+  context "callback phase with skip_info" do # rubocop:disable Metrics/BlockLength
+    before do
+      subject.options[:skip_info] = true
+    end
+
+    let(:env) do
+      Rack::MockRequest.env_for(
+        "http://localhost:3000/auth/tiktok-loginkit/callback?code=CODE&state=STATE&scopes=user.info.basic"
+      )
+    end
+
+    before do # rubocop:disable Metrics/BlockLength
+      session["omniauth.state"] = "STATE"
+
+      # stub AccessToken API call:
+      # https://developers.tiktok.com/doc/oauth-user-access-token-management/
+      stub_request(:post, "https://open.tiktokapis.com/v2/oauth/token/")
+        .with(
+          body: {
+            "client_key" => "CLIENT_KEY",
+            "client_secret" => "CLIENT_SECRET",
+            "code" => "CODE",
+            "grant_type" => "authorization_code",
+            "redirect_uri" => "http://localhost:3000/auth/tiktok-loginkit/callback"
+          }
+        )
+        .to_return(
+          status: 200,
+          body: {
+            "access_token": "act.example12345Example12345Example",
+            "expires_in": 86_400,
+            "open_id": "afd97af1-b87b-48b9-ac98-410aghda5344",
+            "refresh_expires_in": 31_536_000,
+            "refresh_token": "rft.example12345Example12345Example",
+            "scope": "user.info.basic",
+            "token_type": "Bearer"
+          }.to_json,
+          headers: {
+            "Content-Type" => "application/json"
+          }
+        )
+    end
+
+    it "calls the callback with the access token" do
+      status, = subject.call!(env)
+      expect(status).to eq(200)
+      expect(env.fetch("omniauth.auth")).to include(
+        "provider" => "tiktok-loginkit",
+        "uid" => "afd97af1-b87b-48b9-ac98-410aghda5344",
+        "credentials" => include(
+          "token" => "act.example12345Example12345Example",
+          "refresh_token" => "rft.example12345Example12345Example",
+          "expires" => true
+        ),
+        "extra" => {}
+      )
+    end
+  end
 end

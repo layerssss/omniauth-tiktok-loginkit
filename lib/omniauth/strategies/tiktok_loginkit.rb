@@ -58,7 +58,7 @@ module OmniAuth
       private
 
       def user_info # rubocop:disable Metrics/MethodLength
-        return if skip_info?
+        return {} if skip_info?
 
         @user_info ||= begin
           fields = %w[open_id avatar_url avatar_url_100 display_name]
