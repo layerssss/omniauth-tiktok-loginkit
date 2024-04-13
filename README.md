@@ -6,6 +6,10 @@ Using TikTok Oauth API v2.
 
 ## Config
 
+```
+gem "omniauth-tiktok-loginkit"
+```
+
 Configure with CLIENT_KEY and CLIENT_SECRET from TikTok Developers Portal (https://developers.tiktok.com/apps/). Note CLIENT_KEY is the value of "Client Key" field, not "App ID" on the portal.
 
 TikTok requires apps to be approved by review before it can access any APIs, including the Oauth APIs. Also any configuration change to the app will cause it to be back in "Staging" status. So please configure all neccessary "Redirect URI" correctly before submitting a review.
