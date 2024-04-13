@@ -1,5 +1,7 @@
 # omniauth-tiktok-loginkit
 
+![ruby](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/ruby.yml/badge.svg) [![Gem Version](https://badge.fury.io/rb/omniauth-tiktok-loginkit.svg)](https://badge.fury.io/rb/omniauth-tiktok-loginkit)
+
 OmniAuth Strategy for TikTok [LoginKit](https://developers.tiktok.com/doc/login-kit-overview/)
 
 Using TikTok Oauth API v2.
