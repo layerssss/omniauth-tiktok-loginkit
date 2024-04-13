@@ -1,6 +1,7 @@
 # omniauth-tiktok-loginkit
 
-![rspec](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/rspec.yml/badge.svg)
+[![rspec](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/rspec.yml/badge.svg)](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/rspec.yml)
+[![rubocop](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/rubocop.yml/badge.svg)](https://github.com/layerssss/omniauth-tiktok-loginkit/actions/workflows/rubocop.yml)
 [![Gem Version](https://badge.fury.io/rb/omniauth-tiktok-loginkit.svg)](https://badge.fury.io/rb/omniauth-tiktok-loginkit)
 
 OmniAuth Strategy for TikTok [LoginKit](https://developers.tiktok.com/doc/login-kit-overview/)
