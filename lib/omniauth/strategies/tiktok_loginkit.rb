@@ -26,11 +26,23 @@ module OmniAuth
 
       uid { access_token.params.fetch("open_id") }
 
+      # https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema
       info do
-        {
+        hash = {
           name: user_info.fetch("display_name"),
           image: user_info.fetch("avatar_url_100")
         }
+        if request.params.fetch("scopes").include?("user.info.profile")
+          hash.merge!(
+            nickname: user_info.fetch("username"),
+            description: user_info.fetch("bio_description"),
+            urls: {
+              "TikTok" => user_info.fetch("profile_web_link"),
+              "TikTok Deep Link" => user_info.fetch("profile_deep_link")
+            }
+          )
+        end
+        hash
       end
 
       extra do
@@ -62,8 +74,9 @@ module OmniAuth
 
         @user_info ||= begin
           fields = %w[open_id avatar_url avatar_url_100 display_name]
-          if options.scope.include?("user.info.profile")
-            fields.push("profile_web_link", "profile_deep_link", "bio_description", "is_verified")
+          scopes = request.params.fetch("scopes")
+          if scopes.include?("user.info.profile")
+            fields.push("profile_web_link", "profile_deep_link", "bio_description", "is_verified", "username")
           end
           response = access_token
                      .get(
