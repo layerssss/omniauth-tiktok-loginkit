@@ -77,6 +77,9 @@ module OmniAuth
           if scopes.include?("user.info.profile")
             fields.push("profile_web_link", "profile_deep_link", "bio_description", "is_verified", "username")
           end
+          if scopes.include?("user.info.stats")
+            fields.push("follower_count", "following_count", "likes_count", "video_count")
+          end
           response = access_token
                      .get(
                        USER_INFO_URL,
