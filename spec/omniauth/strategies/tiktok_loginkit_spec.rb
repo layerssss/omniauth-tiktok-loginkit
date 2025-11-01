@@ -4,7 +4,8 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
   let(:app) { ->(_) { [200, {}, "success"] } }
   let(:client_key) { "CLIENT_KEY" }
   let(:client_secret) { "CLIENT_SECRET" }
-  let(:subject) { OmniAuth::Strategies::TiktokLoginkit.new(app, client_key, client_secret) }
+  let(:redirect_uri) { nil }
+  let(:subject) { OmniAuth::Strategies::TiktokLoginkit.new(app, client_key, client_secret, redirect_uri: redirect_uri) }
   let(:session) { {} }
 
   before do
@@ -22,6 +23,15 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
       )
     end
 
+    context "callback_url" do
+      let(:redirect_uri) { "https://my-custom-redirect-uri.com/" }
+
+      it "uses the redirect_uri option if present" do
+        subject.call!(env)
+        expect(subject.callback_url).to eq(redirect_uri)
+      end
+    end
+
     it "redirects to the authorize_url" do
       status, headers, = subject.call!(env)
       expect(status).to eq(302)
@@ -31,7 +41,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
       expect(redirected_uri.path).to eq("/v2/auth/authorize/")
       expect(redirected_params).to include(
         "client_key" => client_key,
-        "redirect_uri" => "http://localhost:3000/auth/tiktok-loginkit/callback",
+        "redirect_uri" => subject.callback_url,
         "response_type" => "code",
         "scope" => "user.info.basic",
         "state" => subject.session["omniauth.state"]
