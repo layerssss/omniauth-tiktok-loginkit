@@ -63,7 +63,7 @@ module OmniAuth
       end
 
       def callback_url
-        full_host + callback_path
+        options[:redirect_uri] || (full_host + callback_path)
       end
 
       private
