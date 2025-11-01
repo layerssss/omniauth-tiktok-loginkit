@@ -46,7 +46,7 @@ config.omniauth(
 
 ## Options
 
-* `name`: change endpoint to /auth/tiktok_another, /auth/tiktok_another/callback. default: `"tiktok_login"`
+* `name`: change endpoint to /auth/tiktok_another, /auth/tiktok_another/callback. default: `"tiktok-loginkit"`
 * `skip_info`: skip User Info API call to retrieve `info` hash. default: `false`
 * `scope`: oauth scopes, seperated by comma. default: `"user.info.basic"`
 * `redirect_uri`: change the redirect_uri used after the user authenticates with TikTok (overrides the `name` option)
