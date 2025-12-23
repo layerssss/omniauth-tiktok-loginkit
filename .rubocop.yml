@@ -11,3 +11,7 @@ Style/StringLiteralsInInterpolation:
 Naming/FileName:
   Exclude:
     - 'lib/omniauth-tiktok-loginkit.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb' # good test write long

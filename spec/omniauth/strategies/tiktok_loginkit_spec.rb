@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics/BlockLength
+RSpec.describe OmniAuth::Strategies::TiktokLoginkit do
   let(:app) { ->(_) { [200, {}, "success"] } }
   let(:client_key) { "CLIENT_KEY" }
   let(:client_secret) { "CLIENT_SECRET" }
@@ -49,14 +49,14 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
     end
   end
 
-  context "callback phase" do # rubocop:disable Metrics/BlockLength
+  context "callback phase" do
     let(:env) do
       Rack::MockRequest.env_for(
         "http://localhost:3000/auth/tiktok-loginkit/callback?code=CODE&state=STATE&scopes=user.info.basic"
       )
     end
 
-    before do # rubocop:disable Metrics/BlockLength
+    before do
       session["omniauth.state"] = "STATE"
 
       # stub AccessToken API call:
@@ -140,7 +140,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
     end
   end
 
-  context "callback phase with skip_info" do # rubocop:disable Metrics/BlockLength
+  context "callback phase with skip_info" do
     before do
       subject.options[:skip_info] = true
     end
@@ -151,7 +151,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
       )
     end
 
-    before do # rubocop:disable Metrics/BlockLength
+    before do
       session["omniauth.state"] = "STATE"
 
       # stub AccessToken API call:
@@ -199,14 +199,14 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
     end
   end
 
-  context "callback phase with user.info.profile scope" do # rubocop:disable Metrics/BlockLength
+  context "callback phase with user.info.profile scope" do
     let(:env) do
       Rack::MockRequest.env_for(
         "http://localhost:3000/auth/tiktok-loginkit/callback?code=CODE&state=STATE&scopes=user.info.basic,user.info.profile"
       )
     end
 
-    before do # rubocop:disable Metrics/BlockLength
+    before do
       session["omniauth.state"] = "STATE"
 
       # stub AccessToken API call:
@@ -270,7 +270,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do # rubocop:disable Metrics
         )
     end
 
-    it "has extened user info" do # rubocop:disable Metrics/BlockLength
+    it "has extened user info" do
       status, = subject.call!(env)
       expect(status).to eq(200)
       expect(env.fetch("omniauth.auth")).to include(
