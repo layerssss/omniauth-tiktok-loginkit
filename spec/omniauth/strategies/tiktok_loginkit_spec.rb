@@ -14,6 +14,7 @@ RSpec.describe OmniAuth::Strategies::TiktokLoginkit do
       raise env["omniauth.error"]
     end
     OmniAuth.config.allowed_request_methods = %i[get]
+    OmniAuth.config.silence_get_warning = true
   end
 
   context "request phase" do
