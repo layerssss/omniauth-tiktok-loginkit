@@ -9,8 +9,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.6)
-      public_suffix (>= 2.0.2, < 6.0)
+    addressable (2.9.0)
+      public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     auth-sanitizer (0.1.2)
       version_gem (~> 1.1, >= 1.1.9)
@@ -63,7 +63,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
       reline (>= 0.6.0)
-    public_suffix (5.0.5)
+    public_suffix (5.1.1)
     racc (1.8.1)
     rack (3.1.20)
     rack-protection (4.0.0)
